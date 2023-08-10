@@ -1,7 +1,8 @@
 const path = require("path");
 const fs = require("fs").promises;
+const crypto = require("crypto");
 
-const contactsPath = path.join("db", "contacts.json");
+const contactsPath = path.join(__dirname, "db", "contacts.json");
 
 const getParseContactsPath = async (path) => {
   const data = await fs.readFile(path);
@@ -42,8 +43,10 @@ const removeContact = async (contactId) => {
 const addContact = async (name, email, phone) => {
   try {
     const parseData = await getParseContactsPath(contactsPath);
+
     const newContact = {
-      id: `${parseData.length + 1}`,
+      // id: `${parseData.length + 1}`,
+      id: `${crypto.randomUUID()}`,
       name: name,
       email: email,
       phone: phone,
