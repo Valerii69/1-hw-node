@@ -10,4 +10,4 @@ https://monosnap.com/file/3Y7JeWCJkCY5LNGKXm3nS6Y9fT4Lgf
 Видаляємо контакт\
 https://monosnap.com/file/mLZzzsswXSgCiWkd58vRWTVRX6yaoB
 
-#1-hw-node
+<https://github.com/Valerii69/1-hw-node>
