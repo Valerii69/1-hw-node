@@ -1,12 +1,12 @@
-const nodemon = require("nodemon");
+// const nodemon = require("nodemon");
 // const argv = require("yargs").argv;
-const {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-} = require("./contacts");
-
+// const {
+//   listContacts,
+//   getContactById,
+//   removeContact,
+//   addContact,
+// } = require("./contacts");
+const contacts = require("./contacts");
 const { Command } = require("commander");
 const program = new Command();
 
@@ -21,24 +21,23 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-const invokeAction = ({ action, id, name, email, phone }) => {
+const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
-      listContacts();
-      break;
+      const allContacts = await contacts.listContacts();
+      return console.table(allContacts);
 
     case "get":
-      getContactById(id);
-      break;
-
-    case "remove":
-      removeContact(id);
-      break;
+      const contactById = await contacts.getContactById(id);
+      return console.log(contactById);
 
     case "add":
-      addContact(name, email, phone);
-      break;
+      const addContact = await contacts.addContact(name, email, phone);
+      return console.log(addContact);
 
+    case "remove":
+      const deleteContact = await contacts.removeContact(id);
+      return console.log(deleteContact);
     default:
       console.warn("\x1B[31m Unknown action type!");
   }
